@@ -35,12 +35,12 @@ class Program
             
         }
         
-        if (lastDigit == 7  && number <93)
+        if (lastDigit > 7  && number <93 && number >59)
             {
                 sign = "+";
             }
         else 
-        {   if (number>59 && number <97)
+        {   if (number>59 && number <93 && lastDigit < 3)
             {
                 sign = "-";
             }
@@ -53,7 +53,7 @@ class Program
         }
         else 
         {
-            Console.Write("You didn't pass, trt again next time.");
+            Console.Write("You didn't pass, try again next time.");
         }
             
 
