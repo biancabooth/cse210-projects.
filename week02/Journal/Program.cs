@@ -26,6 +26,8 @@ class Program
             if (newAnswer == 1)
             {
                 aPrompt.GetRandomPrompt();
+                anEntry.Display();
+                theJournal.AddEntry();
                 theJournal.SaveToFile();
             }
             else if (newAnswer == 2)
