@@ -8,10 +8,7 @@ public class Journal
 
     public List<Entry> _entries = new List<Entry>();
 
-    public string[] lines = System.IO.File.ReadAllLines(filename);
-
-
-
+    
 
     public void AddEntry(string date, string promptText, string entryText)
     {
@@ -30,31 +27,29 @@ public class Journal
             entry.Display();
         }
     }
-    public void SaveToFile(string file)
+    public void SaveToFile(List<Entry>_entries)
     {
         string filename = "myFile.txt";
         using (StreamWriter outputFile = new StreamWriter(filename))
         {
-            outputFile.WriteLine(_entries);
+                foreach (Entry line in _entries)
+            {
+                string value = $"{line._date}|{line._promptText}|{line._entryText}";
+                outputFile.WriteLine(value);
+            }
         }
     }
-    public void LoadFromFile(string file)
+    public  List <Entry> LoadFromFile(string file)
     {
         Console.Write("What is the file name? ");
         string filename = Console.ReadLine();
-
-        if (File.Exists(filename)){
-            string[] lines = System.IO.File.ReadAllLines(filename);
-            _entries.Clear();
-            foreach (string line in lines)
-            {
-                string[] parts = line.Split(",");
-                string _date = parts[0];
-                string _promptText = parts[1];
-                string _entryText = parts[2];
-            }
-            _entries.Add(entry);
+        filename = "myFile.txt";
+        string[] lines = System.IO.File.ReadAllLines(filename);
+        foreach (string line in lines)
+        {
+            Console.WriteLine(line);
         }
+        return _entries;
     }
 
 }    
