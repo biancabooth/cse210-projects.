@@ -10,13 +10,16 @@ public class Journal
 
     
 
-    public void AddEntry(string date, string promptText, string entryText)
+    public void AddEntry()
     {
+        PromptGenerator pG = new PromptGenerator();
         Entry newEntry = new Entry();
-        newEntry._date = date;
-        newEntry._promptText = promptText;
-        newEntry._entryText = entryText;
+        newEntry._date = DateTime.Now.ToShortDateString();
+        newEntry._promptText = pG.GetRandomPrompt();
+        Console.WriteLine(newEntry._promptText);
+        newEntry._entryText = Console.ReadLine();
         _entries.Add(newEntry);
+
     }
 
     public void DisplayAll()
@@ -27,29 +30,33 @@ public class Journal
             entry.Display();
         }
     }
-    public void SaveToFile(List<Entry>_entries)
+    public void SaveToFile()
     {
         string filename = "myFile.txt";
         using (StreamWriter outputFile = new StreamWriter(filename))
         {
-                foreach (Entry line in _entries)
+            foreach (Entry line in _entries)
             {
                 string value = $"{line._date}|{line._promptText}|{line._entryText}";
                 outputFile.WriteLine(value);
+
             }
+            Console.WriteLine("Entries saved. ");
         }
     }
-    public  List <Entry> LoadFromFile(string file)
+    public void LoadFromFile()
     {
         Console.Write("What is the file name? ");
         string filename = Console.ReadLine();
-        filename = "myFile.txt";
         string[] lines = System.IO.File.ReadAllLines(filename);
         foreach (string line in lines)
         {
-            Console.WriteLine(line);
+            string[] parts = line.Split("|");
+            string date = parts[0];
+            string prompt = parts[1];
+            string entry = parts[2];
+            Console.WriteLine($"{date}-{prompt}: {entry}");
         }
-        return _entries;
     }
 
 }    

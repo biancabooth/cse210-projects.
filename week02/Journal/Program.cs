@@ -9,26 +9,26 @@ class Program
         Journal theJournal = new Journal();
         Entry anEntry = new Entry();
         PromptGenerator aPrompt = new();
+        Console.WriteLine("Welcome to the Journal Program! ");
         //Do i need a list here or file name?
 
         do
         {
-            Console.WriteLine("Welcome to the Journal Program! ");
+            
             Console.WriteLine("Please select one of the following choices: ");
             Console.WriteLine("1.Write");
             Console.WriteLine("2.Display");
-            Console.WriteLine("3.Load");
-            Console.WriteLine("4.Save");
+            Console.WriteLine("3.Save");
+            Console.WriteLine("4.Load");
             Console.WriteLine("5.Quit");
             Console.Write("What would you like to do? ");
             string answer = Console.ReadLine();
             newAnswer = int.Parse(answer);
             if (newAnswer == 1)
             {
-                aPrompt.GetRandomPrompt();
-                anEntry.Display();
+                
                 theJournal.AddEntry();
-                theJournal.SaveToFile();
+                
             }
             else if (newAnswer == 2)
             {
@@ -38,7 +38,7 @@ class Program
             {
                 theJournal.SaveToFile();
             }
-            else newAnswer == 4;
+            else if (newAnswer == 4)
             {
                 theJournal.LoadFromFile();
             }
